@@ -14,8 +14,8 @@ services:
       - DOCKER_MODS=linuxserver/mods:universal-calibre
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1
     volumes:
-      - /var/lib/docker/volumes/calibre-web-swarm/config:/config
-      - /var/lib/docker/volumes/calibre-swarm/config/Calibre Library:/db
+      - calibre-web-swarm_config:/config
+      - calibre-swarm_config:/db
       - /media/Multimedia/books:/books
     ports:
       - target: 8083
