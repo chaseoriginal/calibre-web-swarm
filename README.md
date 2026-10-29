@@ -8,8 +8,8 @@ deployment and polls this repository for changes.
 | Portainer stack id | 7 |
 | Portainer host | ore-dock-110-1 |
 | Endpoint | - (id -) |
-| Swarm | iymtakl6ibno |
-| Live service | calibre-web-swarm_calibre-web |
+| Swarm | True |
+| Live service | svc:calibre-web-swarm_calibre-web |
 | Git repo | https://github.com/chaseoriginal/calibre-web-swarm |
 | Compose file | `docker-compose.yml` |
 | Auto-update poll | every 900s |
@@ -39,8 +39,8 @@ deployment and polls this repository for changes.
 ## Verifying a deployment
 
 ```bash
-docker service ls --filter name=calibre-web-swarm_calibre-web
-docker service inspect calibre-web-swarm_calibre-web --format '{{json .Spec.TaskTemplate.ContainerSpec.Mounts}}'
+docker service ls --filter name=svc:calibre-web-swarm_calibre-web
+docker service inspect svc:calibre-web-swarm_calibre-web --format '{{json .Spec.TaskTemplate.ContainerSpec.Mounts}}'
 ```
 
 A healthy stack shows `1/1` and the same volume names as before.
