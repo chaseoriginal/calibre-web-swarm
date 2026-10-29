@@ -1,37 +1,26 @@
-x-base: &base
-  restart: unless-stopped
-  networks:
-    - calibre-web-swarm_default
-
 services:
   calibre-web:
-    <<: *base
     image: lscr.io/linuxserver/calibre-web:latest
-    container_name: ${CNAME}
-    user: ${PUID}:${PGID}
+    container_name: calibre-web-swarm
     environment:
-      - TZ=${TZ}
-      - DOCKER_MODS=linuxserver/mods:universal-calibre
-      - OAUTHLIB_RELAX_TOKEN_SCOPE=1
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Chicago
+    - DOCKER_MODS=linuxserver/mods:universal-calibre
+    - OAUTHLIB_RELAX_TOKEN_SCOPE=1
     volumes:
-      - calibre-web-swarm_config:/config
-      - calibre-swarm_config:/db
-      - /media/Multimedia/books:/books
+    - calibre-web-swarm_config:/config
     ports:
-      - target: 8083
-        published: 8083
-        protocol: tcp
-        mode: host
+    - target: 8083
+      published: 8083
+      protocol: tcp
+      mode: host
     deploy:
-      mode: replicated
-      replicas: 1
       placement:
         constraints:
-          - node.labels.deployment.target.calibre-web == true
+        - node.labels.deployment.target.calibre-web == true
       restart_policy:
         condition: on-failure
-
-networks:
-  calibre-web-swarm_default:
-    external: true
-    name: calibre-web-swarm_default
+volumes:
+  calibre-web-swarm_config:
+    name: calibre-web-swarm_config
