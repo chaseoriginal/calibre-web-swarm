@@ -1,6 +1,6 @@
 services:
   calibre-web:
-    image: lscr.io/linuxserver/calibre-web:latest
+    image: linuxserver/calibre-web:latest
     container_name: calibre-web-swarm
     environment:
     - PUID=1000
@@ -18,7 +18,7 @@ services:
     deploy:
       placement:
         constraints:
-        - node.labels.deployment.target.calibre-web == true
+        - node.role==manager
       restart_policy:
         condition: on-failure
 volumes:
