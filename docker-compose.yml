@@ -1,6 +1,6 @@
 services:
   calibre-web:
-    image: linuxserver/calibre-web:latest
+    image: linuxserver/calibre-web:0.6.27-ls409
     container_name: calibre-web-swarm
     environment:
     - PUID=1000
